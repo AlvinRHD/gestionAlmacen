@@ -1,3 +1,6 @@
+using gestionAlmacen.Data;
+using gestionAlmacen.Repositories.Clientes;
+
 namespace gestionAlmacen
 {
     public class Program
@@ -5,6 +8,11 @@ namespace gestionAlmacen
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            //
+            builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
+            //
+            builder.Services.AddScoped<IClientesRepository, ClientesRepository>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
