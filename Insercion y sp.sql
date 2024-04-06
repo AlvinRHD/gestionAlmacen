@@ -1,3 +1,5 @@
+use gestionAlmacen
+go
 
 --------------
 -- Insertar en la tabla Categorias
@@ -23,7 +25,9 @@ VALUES (5, '2024-04-03', 200.00, 'Completada'); -- Asignando el ID del cliente p
 INSERT INTO Detalles_Venta (ID_Venta, ID_Producto, Cantidad, Precio_Unitario, Subtotal, Impuesto) 
 VALUES (9, 11, 2, 50.00, 100.00, 10.00); -- Asignando el ID de venta y producto previamente creados
 
+
 ---Selecionamos todas las tablas
+
 select * from Clientes
 select * from Ventas
 select * from Detalles_Venta
@@ -107,7 +111,105 @@ begin
 	delete from Clientes where ID_Cliente = @ID_Cliente;
 end;
 
-exec dbo.sp_Clientes_Delete 7
+exec dbo.sp_Clientes_Delete 5
+
+
+-------------------------------------------------------------------------
+--------------------------------------------------------------------------
+---------------Procedimientos almacenados de ventas ----------------------
+--------------------------------------------------------------------------
+
+------------------------------------------
+--Prodecimiento alamcenado: Devuelve el listado de todas las ventas
+-------------------------------------------
+create procedure dbo.sp_Ventas_GetAll
+as
+begin
+	select Ventas.ID_Venta, Ventas.Fecha, Ventas.Total, Ventas.EstadoVenta, Clientes.Nombre
+	from Ventas
+	inner join Clientes
+	on Ventas.ID_Cliente = Clientes.ID_Cliente
+end;
+
+exec dbo.sp_Ventas_GetAll
+
+
+------------------------------------------
+--Prodecimiento alamcenado: Filtra los registros por el ID_Venta
+-------------------------------------------
+create procedure dbo.sp_Ventas_GetById (@ID_Venta int)
+as
+begin
+	Select ID_Venta, ID_Cliente, Fecha, Total, EstadoVenta
+	from Ventas
+	where ID_Venta = @ID_Venta
+end;
+
+exec dbo.sp_Ventas_GetById 11
+
+
+------------------------------------------
+--Prodecimiento alamcenado: Inserta datos a la tabla Ventas
+-------------------------------------------
+create procedure dbo.sp_Ventas_Insert 
+(
+@ID_Cliente int, @Fecha date,
+@Total money, @EstadoVenta nvarchar(50)
+)
+as
+begin
+	insert into dbo.Ventas
+	values (@ID_Cliente, @Fecha, @Total, @EstadoVenta)
+end;
+
+exec dbo.sp_Ventas_Insert 10, '2025-04-04', 300, 'NoCompleta'
+
+select * from Ventas
+select * from Clientes
+
+
+------------------------------------------
+--Prodecimiento alamcenado: Actualiza los datos a la tabla ventas
+-------------------------------------------
+alter procedure dbo.sp_Ventas_Update 
+(
+@ID_Venta int , @ID_Cliente int,
+@Fecha date, @Total money, @EstadoVenta nvarchar(50) 
+)
+as
+begin
+	update dbo.Ventas
+	set @ID_Cliente = ID_Cliente,  Fecha = @Fecha, Total = @Total, EstadoVenta = @EstadoVenta
+	where ID_Venta = @ID_Venta
+end;
+
+
+exec dbo.sp_Ventas_Update 12, 10, '2025-04-06', 600.00, 'No';
+
+EXEC dbo.sp_Ventas_Update @ID_Venta = 11, @ID_Cliente = 8, @Fecha = '2024-04-06', @Total = 500.00, @EstadoVenta = 'Completada';
+
+
+select * from Clientes
+select * from Ventas
+
+
+------------------------------------------
+--Prodecimiento alamcenado: Elimina los datos de la tabla Ventas
+-------------------------------------------
+
+create procedure dbo.sp_Ventas_Delete
+(
+@ID_Venta int
+)
+as
+begin
+	delete from Ventas
+	where ID_Venta = @ID_Venta;
+end;
+
+exec dbo.sp_Ventas_Delete 11
+
+select * from Ventas
 
 
 ------------------------------------
