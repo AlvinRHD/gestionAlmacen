@@ -13,15 +13,15 @@ VALUES ('Cliente Ejemplo', 'Dirección del cliente', '987654321', 'cliente@exampl
 
 -- Insertar en la tabla Productos
 INSERT INTO Productos (Nombre, Descripcion, Precio, Stock, ID_Categoria, ID_Proveedor) 
-VALUES ('Producto Ejemplo', 'Descripción del producto', 100.00, 10, 7, 7); -- Asignando la categoría y proveedor previamente creados
+VALUES ('Producto Ejemplo', 'Descripción del producto', 100.00, 10, 1, 1); -- Asignando la categoría y proveedor previamente creados
 
 -- Insertar en la tabla Ventas
 INSERT INTO Ventas (ID_Cliente, Fecha, Total, EstadoVenta) 
-VALUES (5, '2024-04-03', 200.00, 'Completada'); -- Asignando el ID del cliente previamente creado
+VALUES (1, '2024-04-03', 200.00, 'Completada'); -- Asignando el ID del cliente previamente creado
 
 -- Insertar en la tabla Detalles_Venta
 INSERT INTO Detalles_Venta (ID_Venta, ID_Producto, Cantidad, Precio_Unitario, Subtotal, Impuesto) 
-VALUES (9, 11, 2, 50.00, 100.00, 10.00); -- Asignando el ID de venta y producto previamente creados
+VALUES (1, 2, 2, 50.00, 100.00, 10.00); -- Asignando el ID de venta y producto previamente creados
 
 ---Selecionamos todas las tablas
 select * from Clientes
@@ -55,7 +55,7 @@ begin
 	where ID_Cliente = @ID_Cliente
 end;
 
-exec dbo.sp_Clientes_GetById 5
+exec dbo.sp_Clientes_GetById 1
 
 
 ------------------------------------------
@@ -92,7 +92,7 @@ begin
 	where ID_Cliente = @ID_Cliente
 end;
 
-exec dbo.sp_Clientes_Update 'ren', 'San', '789024', 'ReneSalmeron@gmail.com', 7
+exec dbo.sp_Clientes_Update 'ren', 'San', '789024', 'ReneSalmeron@gmail.com', 1
 
 
 ------------------------------------------
@@ -107,7 +107,7 @@ begin
 	delete from Clientes where ID_Cliente = @ID_Cliente;
 end;
 
-exec dbo.sp_Clientes_Delete 7
+exec dbo.sp_Clientes_Delete 1
 
 
 ------------------------------------
