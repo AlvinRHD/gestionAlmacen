@@ -14,6 +14,7 @@ namespace gestionAlmacen.Repositories.Clientes
             _dataAccess = dataAccess;
         }
 
+
         public IEnumerable<MClientes> GetAll()
         {
             using (var connection = _dataAccess.GetConnection())
@@ -27,7 +28,7 @@ namespace gestionAlmacen.Repositories.Clientes
             }
         }
 
-        public MClientes? GetById(int ID_Cliente)
+        public MClientes? GetById(int id)
         {
             using (var connection = _dataAccess.GetConnection())
             {
@@ -35,7 +36,7 @@ namespace gestionAlmacen.Repositories.Clientes
 
                 return connection.QueryFirstOrDefault<MClientes>(
                                     storeProcedure,
-                                    new { ID_Cliente = ID_Cliente },
+                                    new { ID_Cliente = id },
                                     commandType: CommandType.StoredProcedure
                                    );
             }
@@ -69,7 +70,7 @@ namespace gestionAlmacen.Repositories.Clientes
             }
         }
 
-        public void Delete(int ID_Cliente)
+        public void Delete(int id)
         {
             using (var connection = _dataAccess.GetConnection())
             {
@@ -77,7 +78,7 @@ namespace gestionAlmacen.Repositories.Clientes
 
                 connection.Execute(
                     storeProcedure,
-                    new { ID_Cliente },
+                    new { id },
                     commandType: CommandType.StoredProcedure
                     );
             }

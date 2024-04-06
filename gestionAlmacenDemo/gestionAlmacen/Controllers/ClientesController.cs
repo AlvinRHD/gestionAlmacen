@@ -20,7 +20,7 @@ namespace gestionAlmacen.Controllers
         }
 
         //
-        public ActionResult Details(int ID_Cliente)
+        public ActionResult Details(int id)
         {
             return View();
         }
@@ -54,9 +54,9 @@ namespace gestionAlmacen.Controllers
 
         //Muestra la vista de editar Cliente
         [HttpGet]
-        public ActionResult Edit(int ID_Cliente)
+        public ActionResult Edit(int id)
         {
-            var mClientes = _clientesRepository.GetById(ID_Cliente);
+            var mClientes = _clientesRepository.GetById(id);
 
             if (mClientes == null)
             {
@@ -87,9 +87,9 @@ namespace gestionAlmacen.Controllers
 
         //Muestra la vista de elminar
         [HttpGet]
-        public ActionResult Delete(int ID_Cliente)
+        public ActionResult Delete(int id)
         {
-            var mClientes = _clientesRepository.GetById(ID_Cliente);
+            var mClientes = _clientesRepository.GetById(id);
 
             if (mClientes == null)
             {
@@ -114,10 +114,10 @@ namespace gestionAlmacen.Controllers
             }
             catch (Exception ex)
             {
+                TempData["message"] = "Error al eliminar el cliente: " + ex.Message;
                 return View(mClientes);
             }
         }
-
 
     }
 }

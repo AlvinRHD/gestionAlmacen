@@ -6,13 +6,13 @@ namespace gestionAlmacen.Repositories.Clientes
     {
         void Add(MClientes mClientes);
 
-        void Delete(int ID_Cliente);
+        void Delete(int id);
 
         void Edit(MClientes mClientes);
 
         IEnumerable<MClientes> GetAll();
 
-        MClientes? GetById(int ID_Cliente);
+        MClientes? GetById(int id);
 
     }
 }
