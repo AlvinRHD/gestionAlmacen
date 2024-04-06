@@ -33,7 +33,7 @@ namespace gestionAlmacen.Repositories.DetalleVenta
                 var detalles_ventas = connection.Query<MDetalle_Venta, MVentas, MDetalle_Venta>
                     (storedProcedure, (detallesVenta, mVentas) =>
                     {
-                        detallesVenta.MVentas = mVentas;
+                        detallesVenta.mVentas = mVentas;
 
                         return detallesVenta;
                     },
