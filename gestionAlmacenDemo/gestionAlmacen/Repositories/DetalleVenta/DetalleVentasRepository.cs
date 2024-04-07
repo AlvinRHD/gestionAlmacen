@@ -37,7 +37,7 @@ namespace gestionAlmacen.Repositories.DetalleVenta
 
                         return detallesVenta;
                     },
-                    splitOn: "Datalles fecha",
+                    splitOn: "ID_Venta",
                     commandType: CommandType.StoredProcedure);
 
                 return detalles_ventas;
@@ -112,8 +112,5 @@ namespace gestionAlmacen.Repositories.DetalleVenta
             }
 
         }
-
     }
-
-
 }

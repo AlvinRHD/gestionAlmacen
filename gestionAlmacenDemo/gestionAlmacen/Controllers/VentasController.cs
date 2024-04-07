@@ -125,7 +125,7 @@ namespace gestionAlmacen.Controllers
             }
             catch
             {
-                return RedirectToAction(nameof(Delete), new { ID_Cliente = id, error = true });
+                return RedirectToAction(nameof(Delete), new { ID_Venta = id, error = true });
 
             }
         }

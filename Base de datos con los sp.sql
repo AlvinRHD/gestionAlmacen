@@ -1,90 +1,6 @@
-USE [gestionAlmacen]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_Ventas_Update]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_Ventas_Update]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_Ventas_Insert]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_Ventas_Insert]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_Ventas_GetById]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_Ventas_GetById]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_Ventas_GetAll]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_Ventas_GetAll]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_Ventas_Delete]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_Ventas_Delete]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_Update]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_DetallesVenta_Update]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_Insert]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_DetallesVenta_Insert]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_GetByVentaID]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_DetallesVenta_GetByVentaID]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_GetAll]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_DetallesVenta_GetAll]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_Delete]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_DetallesVenta_Delete]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_Clientes_Update]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_Clientes_Update]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_Clientes_Insert]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_Clientes_Insert]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_Clientes_GetById]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_Clientes_GetById]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_Clientes_GetAll]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_Clientes_GetAll]
-GO
-/****** Object:  StoredProcedure [dbo].[sp_Clientes_Delete]    Script Date: 6/4/2024 14:54:48 ******/
-DROP PROCEDURE [dbo].[sp_Clientes_Delete]
-GO
-ALTER TABLE [dbo].[Ventas] DROP CONSTRAINT [FK__Ventas__ID_Clien__571DF1D5]
-GO
-ALTER TABLE [dbo].[Productos] DROP CONSTRAINT [FK__Productos__ID_Pr__5629CD9C]
-GO
-ALTER TABLE [dbo].[Productos] DROP CONSTRAINT [FK__Productos__ID_Ca__5535A963]
-GO
-ALTER TABLE [dbo].[Detalles_Venta] DROP CONSTRAINT [FK__Detalles___ID_Ve__5441852A]
-GO
-ALTER TABLE [dbo].[Detalles_Venta] DROP CONSTRAINT [FK__Detalles___ID_Pr__534D60F1]
-GO
-/****** Object:  Table [dbo].[Ventas]    Script Date: 6/4/2024 14:54:48 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Ventas]') AND type in (N'U'))
-DROP TABLE [dbo].[Ventas]
-GO
-/****** Object:  Table [dbo].[Proveedores]    Script Date: 6/4/2024 14:54:48 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Proveedores]') AND type in (N'U'))
-DROP TABLE [dbo].[Proveedores]
-GO
-/****** Object:  Table [dbo].[Productos]    Script Date: 6/4/2024 14:54:48 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Productos]') AND type in (N'U'))
-DROP TABLE [dbo].[Productos]
-GO
-/****** Object:  Table [dbo].[Detalles_Venta]    Script Date: 6/4/2024 14:54:48 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Detalles_Venta]') AND type in (N'U'))
-DROP TABLE [dbo].[Detalles_Venta]
-GO
-/****** Object:  Table [dbo].[Clientes]    Script Date: 6/4/2024 14:54:48 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Clientes]') AND type in (N'U'))
-DROP TABLE [dbo].[Clientes]
-GO
-/****** Object:  Table [dbo].[Categorias]    Script Date: 6/4/2024 14:54:48 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Categorias]') AND type in (N'U'))
-DROP TABLE [dbo].[Categorias]
-GO
 USE [master]
 GO
-/****** Object:  Database [gestionAlmacen]    Script Date: 6/4/2024 14:54:48 ******/
-DROP DATABASE [gestionAlmacen]
-GO
-/****** Object:  Database [gestionAlmacen]    Script Date: 6/4/2024 14:54:48 ******/
+/****** Object:  Database [gestionAlmacen]    Script Date: 7/4/2024 13:06:10 ******/
 CREATE DATABASE [gestionAlmacen]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -164,9 +80,50 @@ ALTER DATABASE [gestionAlmacen] SET QUERY_STORE = ON
 GO
 ALTER DATABASE [gestionAlmacen] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
 GO
+/****** Object:  Login [SAVI5\ezequ]    Script Date: 7/4/2024 13:06:11 ******/
+CREATE LOGIN [SAVI5\ezequ] FROM WINDOWS WITH DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english]
+GO
+/****** Object:  Login [NT SERVICE\Winmgmt]    Script Date: 7/4/2024 13:06:11 ******/
+CREATE LOGIN [NT SERVICE\Winmgmt] FROM WINDOWS WITH DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english]
+GO
+/****** Object:  Login [NT SERVICE\SQLWriter]    Script Date: 7/4/2024 13:06:11 ******/
+CREATE LOGIN [NT SERVICE\SQLWriter] FROM WINDOWS WITH DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english]
+GO
+/****** Object:  Login [NT SERVICE\SQLTELEMETRY$SQLEXPRESS]    Script Date: 7/4/2024 13:06:11 ******/
+CREATE LOGIN [NT SERVICE\SQLTELEMETRY$SQLEXPRESS] FROM WINDOWS WITH DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english]
+GO
+/****** Object:  Login [NT Service\MSSQL$SQLEXPRESS]    Script Date: 7/4/2024 13:06:11 ******/
+CREATE LOGIN [NT Service\MSSQL$SQLEXPRESS] FROM WINDOWS WITH DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english]
+GO
+/****** Object:  Login [NT AUTHORITY\SYSTEM]    Script Date: 7/4/2024 13:06:11 ******/
+CREATE LOGIN [NT AUTHORITY\SYSTEM] FROM WINDOWS WITH DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english]
+GO
+/****** Object:  Login [BUILTIN\Usuarios]    Script Date: 7/4/2024 13:06:11 ******/
+CREATE LOGIN [BUILTIN\Usuarios] FROM WINDOWS WITH DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english]
+GO
+/* For security reasons the login is created disabled and with a random password. */
+/****** Object:  Login [##MS_PolicyTsqlExecutionLogin##]    Script Date: 7/4/2024 13:06:11 ******/
+CREATE LOGIN [##MS_PolicyTsqlExecutionLogin##] WITH PASSWORD=N'I0mbh2h2LExlLqGtKCzA3gKloh5kVFVTSQhCJdHxjOc=', DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english], CHECK_EXPIRATION=OFF, CHECK_POLICY=ON
+GO
+ALTER LOGIN [##MS_PolicyTsqlExecutionLogin##] DISABLE
+GO
+/* For security reasons the login is created disabled and with a random password. */
+/****** Object:  Login [##MS_PolicyEventProcessingLogin##]    Script Date: 7/4/2024 13:06:11 ******/
+CREATE LOGIN [##MS_PolicyEventProcessingLogin##] WITH PASSWORD=N'yZA42bNZ/tF4e9kR7Lf4BxpzMhfVs83M9EtWZpKNeRc=', DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english], CHECK_EXPIRATION=OFF, CHECK_POLICY=ON
+GO
+ALTER LOGIN [##MS_PolicyEventProcessingLogin##] DISABLE
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [SAVI5\ezequ]
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [NT SERVICE\Winmgmt]
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [NT SERVICE\SQLWriter]
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [NT Service\MSSQL$SQLEXPRESS]
+GO
 USE [gestionAlmacen]
 GO
-/****** Object:  Table [dbo].[Categorias]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  Table [dbo].[Categorias]    Script Date: 7/4/2024 13:06:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -181,7 +138,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Clientes]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  Table [dbo].[Clientes]    Script Date: 7/4/2024 13:06:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -198,7 +155,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Detalles_Venta]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  Table [dbo].[Detalles_Venta]    Script Date: 7/4/2024 13:06:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -217,7 +174,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Productos]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  Table [dbo].[Productos]    Script Date: 7/4/2024 13:06:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -236,7 +193,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Proveedores]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  Table [dbo].[Proveedores]    Script Date: 7/4/2024 13:06:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -253,7 +210,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Ventas]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  Table [dbo].[Ventas]    Script Date: 7/4/2024 13:06:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -339,7 +296,7 @@ ALTER TABLE [dbo].[Ventas]  WITH CHECK ADD FOREIGN KEY([ID_Cliente])
 REFERENCES [dbo].[Clientes] ([ID_Cliente])
 ON DELETE CASCADE
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Clientes_Delete]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_Clientes_Delete]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -354,7 +311,7 @@ begin
 end;
 
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Clientes_GetAll]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_Clientes_GetAll]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -365,7 +322,7 @@ begin
 	select ID_Cliente, Nombre, Direccion, Telefono, CorreoElectronico from Clientes
 end;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Clientes_GetById]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_Clientes_GetById]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -378,7 +335,7 @@ begin
 	where ID_Cliente = @ID_Cliente
 end;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Clientes_Insert]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_Clientes_Insert]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -391,7 +348,7 @@ begin
 	values (@Nombre, @Direccion, @Telefono, @CorreoElectronico)
 end;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Clientes_Update]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_Clientes_Update]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -406,7 +363,7 @@ begin
 end;
 
 GO
-/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_Delete]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_Delete]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -422,7 +379,7 @@ BEGIN
 END;
 
 GO
-/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_GetAll]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_GetAll]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -431,10 +388,11 @@ CREATE PROCEDURE [dbo].[sp_DetallesVenta_GetAll]
 AS
 BEGIN
     SELECT Detalles_Venta.ID_Detalle, Detalles_Venta.ID_Venta, Detalles_Venta.ID_Producto, Detalles_Venta.Cantidad, Detalles_Venta.Precio_Unitario, Detalles_Venta.Subtotal, Detalles_Venta.Impuesto
-    FROM Detalles_Venta;
+    FROM Detalles_Venta
+	INNER JOIN Ventas ON Detalles_Venta.ID_Venta = Ventas.ID_Venta;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_GetByVentaID]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_GetByVentaID]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -447,7 +405,7 @@ BEGIN
     WHERE ID_Detalle = @ID_Detalle;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_Insert]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_Insert]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -467,7 +425,7 @@ BEGIN
     VALUES (@ID_Venta, @ID_Producto, @Cantidad, @Precio_Unitario, @Subtotal, @Impuesto);
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_Update]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_DetallesVenta_Update]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -489,7 +447,7 @@ BEGIN
     WHERE ID_Detalle = @ID_Detalle;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Ventas_Delete]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_Ventas_Delete]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -504,7 +462,7 @@ begin
 	where ID_Venta = @ID_Venta;
 end;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Ventas_GetAll]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_Ventas_GetAll]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -518,7 +476,7 @@ begin
 	on Ventas.ID_Cliente = Clientes.ID_Cliente
 end;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Ventas_GetById]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_Ventas_GetById]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -532,7 +490,7 @@ begin
 end;
 
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Ventas_Insert]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_Ventas_Insert]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -548,7 +506,7 @@ begin
 	values (@ID_Cliente, @Fecha, @Total, @EstadoVenta)
 end;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_Ventas_Update]    Script Date: 6/4/2024 14:54:49 ******/
+/****** Object:  StoredProcedure [dbo].[sp_Ventas_Update]    Script Date: 7/4/2024 13:06:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -569,8 +527,3 @@ USE [master]
 GO
 ALTER DATABASE [gestionAlmacen] SET  READ_WRITE 
 GO
-
-
-
-
-
