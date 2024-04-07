@@ -29,7 +29,7 @@ namespace gestionAlmacen.Repositories.DetalleVenta
         {
             using (var connection = _dataAccess.GetConnection())
             {
-                string storedProcedure = "dbo.spDetalla_Venta_GetAll";
+                string storedProcedure = "dbo.sp_DetallesVenta_GetAll";
                 var detalles_ventas = connection.Query<MDetalle_Venta, MVentas, MDetalle_Venta>
                     (storedProcedure, (detallesVenta, mVentas) =>
                     {
@@ -48,7 +48,7 @@ namespace gestionAlmacen.Repositories.DetalleVenta
         {
             using (var connection = _dataAccess.GetConnection())
             {
-                string storedProcedure = "dbo.spDetalla_Venta_GetId";
+                string storedProcedure = "dbo.sp_DetallesVenta_GetByVentaID";
 
                 return connection.QueryFirstOrDefault<MDetalle_Venta>(
                                 storedProcedure,
@@ -63,7 +63,7 @@ namespace gestionAlmacen.Repositories.DetalleVenta
         {
             using (var connection = _dataAccess.GetConnection())
             {
-                string storedProcedure = "dbo.spDetalla_Venta_Insert";
+                string storedProcedure = "dbo.sp_DetallesVenta_Insert";
 
                 connection.Execute(
                         storedProcedure,
@@ -83,7 +83,7 @@ namespace gestionAlmacen.Repositories.DetalleVenta
         {
             using (var connection = _dataAccess.GetConnection())
             {
-                string storedProcedure = "dbo.spDetalla_Venta_Update";
+                string storedProcedure = "dbo.sp_DetallesVenta_Update";
 
                 connection.Execute(
                         storedProcedure,
@@ -103,7 +103,7 @@ namespace gestionAlmacen.Repositories.DetalleVenta
         {
             using (var connection = _dataAccess.GetConnection())
             {
-                string storedProcedure = "dbo.spDetalla_Venta_Delete";
+                string storedProcedure = "dbo.sp_DetallesVenta_Delete";
 
                 connection.Execute(
                     storedProcedure,
