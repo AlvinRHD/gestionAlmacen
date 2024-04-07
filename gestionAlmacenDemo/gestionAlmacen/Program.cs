@@ -1,5 +1,7 @@
 using gestionAlmacen.Data;
 using gestionAlmacen.Repositories.Clientes;
+using gestionAlmacen.Repositories.DetalleVenta;
+using gestionAlmacen.Repositories.Ventas;
 
 namespace gestionAlmacen
 {
@@ -13,6 +15,10 @@ namespace gestionAlmacen
             builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
             //
             builder.Services.AddScoped<IClientesRepository, ClientesRepository>();
+            //
+            builder.Services.AddScoped<IVentasRepository, VentasRepository>();
+            //
+            builder.Services.AddScoped<IDetalleVentasRepository, DetalleVentasRepository>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

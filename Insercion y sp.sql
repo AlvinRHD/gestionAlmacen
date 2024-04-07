@@ -211,6 +211,8 @@ exec dbo.sp_Ventas_Delete 11
 
 select * from Ventas
 
+
+
 ------------------------------------------
 --Prodecimiento alamcenado de la tabla Detalle_Venta
 -------------------------------------------

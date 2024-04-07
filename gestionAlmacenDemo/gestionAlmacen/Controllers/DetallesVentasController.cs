@@ -11,13 +11,13 @@ namespace gestionAlmacen.Controllers
         private readonly IDetalleVentasRepository _detatalleVentaRepository;
         private SelectList _ventasList;
 
-    public DetallesVentasController(IDetalleVentasRepository detatalleVentaRepository)
+        public DetallesVentasController(IDetalleVentasRepository detatalleVentaRepository)
         {
             _detatalleVentaRepository = detatalleVentaRepository;
             _ventasList = new SelectList(
                 _detatalleVentaRepository.GetAllVentas(),
-                nameof(MVentas.ID_Ventas),
-                nameof(MVentas.ID_Cliente)
+                nameof(MVentas.ID_Cliente),
+                nameof(MVentas.ID_Venta)
                 );
         }
 
@@ -60,19 +60,18 @@ namespace gestionAlmacen.Controllers
         }
 
         // GET: FacultyController/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
             var detalle_Venta = _detatalleVentaRepository.GetById(id);
 
             _ventasList = new SelectList(
-                                       _detatalleVentaRepository.GetAllVentas(),
-                                       nameof(MVentas.ID_Venta),
-                                       nameof(MVentas.ID_Cliente),
-                                       nameof(MVentas.Fecha),
-                                       nameof(MVentas.Total),
-                                       nameof(MVentas.EstadoVenta),
+                                _detatalleVentaRepository.GetAllVentas(),
+                                nameof(MVentas.ID_Cliente),
+                                nameof(MVentas.ID_Venta),
+                                //Posible error mVentas a MVentas
+                                detalle_Venta?.mVentas?.ID_Venta
 
-                                       detalle_Venta?.MVentas?.ID_Detalle
                                    );
 
             ViewBag.Clientes = _ventasList;
@@ -100,6 +99,7 @@ namespace gestionAlmacen.Controllers
         }
 
         // GET: FacultyController/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             var detalleVenta = _detatalleVentaRepository.GetById(id);

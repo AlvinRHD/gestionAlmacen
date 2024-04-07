@@ -1,0 +1,65 @@
+﻿@model IEnumerable<gestionAlmacen.Models.MVentas>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID_Venta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ID_Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoVenta)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_Venta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_Cliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoVenta)
+            </td>
+            <td>
+                    <a asp-controller="Ventas"
+                       asp-action="Edit"
+                       asp-route-id="@item.ID_Venta"
+                       class="btn btn-primary">
+                        Editar
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@item.ID_Venta"
+                       class="btn btn-danger">
+                        Eliminar
+                    </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
