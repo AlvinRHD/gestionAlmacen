@@ -1,6 +1,7 @@
 using gestionAlmacen.Data;
 using gestionAlmacen.Repositories.Clientes;
 using gestionAlmacen.Repositories.DetalleVenta;
+using gestionAlmacen.Repositories.Productos;
 using gestionAlmacen.Repositories.Ventas;
 
 namespace gestionAlmacen
@@ -19,6 +20,8 @@ namespace gestionAlmacen
             builder.Services.AddScoped<IVentasRepository, VentasRepository>();
             //
             builder.Services.AddScoped<IDetalleVentasRepository, DetalleVentasRepository>();
+            //
+            builder.Services.AddScoped<IProductosRepository, ProductosRepository>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

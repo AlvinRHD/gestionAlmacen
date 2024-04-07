@@ -15,7 +15,7 @@ VALUES ('Cliente Ejemplo', 'Dirección del cliente', '987654321', 'cliente@exampl
 
 -- Insertar en la tabla Productos
 INSERT INTO Productos (Nombre, Descripcion, Precio, Stock, ID_Categoria, ID_Proveedor) 
-VALUES ('Producto Ejemplo', 'Descripción del producto', 100.00, 10, 7, 7); -- Asignando la categoría y proveedor previamente creados
+VALUES ('Producto Ejemplo', 'Descripción del producto', 100.00, 10, 8, 8); -- Asignando la categoría y proveedor previamente creados
 
 -- Insertar en la tabla Ventas
 INSERT INTO Ventas (ID_Cliente, Fecha, Total, EstadoVenta) 
@@ -34,7 +34,6 @@ select * from Detalles_Venta
 select * from Productos
 select * from Categorias
 select * from Proveedores
-
 
 ------------------------------------------
 --Prodecimiento alamcenado: Devuelve el listado de todos los Clientes
@@ -190,8 +189,9 @@ EXEC dbo.sp_Ventas_Update @ID_Venta = 11, @ID_Cliente = 8, @Fecha = '2024-04-06'
 
 
 select * from Clientes
+select * from Productos
 select * from Ventas
-
+select * from Detalles_Venta
 
 ------------------------------------------
 --Prodecimiento alamcenado: Elimina los datos de la tabla Ventas
@@ -339,6 +339,107 @@ EXEC dbo.sp_DetallesVenta_Delete 3
 
 
 
+------------------------------------------
+--Prodecimiento alamcenado de la tabla Productos --Lista los productos
+-------------------------------------------
+
+CREATE PROCEDURE dbo.sp_Productos_GetAll
+AS
+BEGIN
+    SELECT ID_Producto, Nombre, Descripcion, Precio, Stock, ID_Categoria, ID_Proveedor
+    FROM Productos;
+END;
+
+exec dbo.sp_Productos_GetAll
+
+------------------------------------------
+--Prodecimiento alamcenado: Filtra los registros por el ID_Producto
+-------------------------------------------
+
+CREATE PROCEDURE dbo.sp_Productos_GetById (@ID_Producto INT)
+AS
+BEGIN
+    SELECT ID_Producto, Nombre, Descripcion, Precio, Stock, ID_Categoria, ID_Proveedor
+    FROM Productos
+    WHERE ID_Producto = @ID_Producto;
+END;
+
+SELECT * FROM Productos
+
+EXEC dbo.sp_Productos_GetById 11
+
+
+------------------------------------------
+--Prodecimiento alamcenado: Inserta datos a la tabla Productos
+-------------------------------------------
+CREATE PROCEDURE dbo.sp_Productos_Insert 
+(
+    @Nombre NVARCHAR(100),
+    @Descripcion NVARCHAR(255),
+    @Precio MONEY,
+    @Stock INT,
+    @ID_Categoria INT,
+    @ID_Proveedor INT
+)
+AS
+BEGIN
+    INSERT INTO Productos (Nombre, Descripcion, Precio, Stock, ID_Categoria, ID_Proveedor)
+    VALUES (@Nombre, @Descripcion, @Precio, @Stock, @ID_Categoria, @ID_Proveedor);
+END;
+
+EXEC dbo.sp_Productos_Insert 'PS4', 'Consola', 400, 20, 7, 7
+
+SELECT * FROM Productos
+
+
+------------------------------------------
+--Prodecimiento alamcenado: Actualizar datos a la tabla Productos
+-------------------------------------------
+
+CREATE PROCEDURE dbo.sp_Productos_Update
+(
+    @ID_Producto INT,
+    @Nombre NVARCHAR(100),
+    @Descripcion NVARCHAR(255),
+    @Precio MONEY,
+    @Stock INT,
+    @ID_Categoria INT,
+    @ID_Proveedor INT
+)
+AS
+BEGIN
+    UPDATE Productos
+    SET Nombre = @Nombre, Descripcion = @Descripcion, Precio = @Precio, Stock = @Stock, ID_Categoria = @ID_Categoria, ID_Proveedor = @ID_Proveedor
+    WHERE ID_Producto = @ID_Producto;
+END;
+
+EXEC dbo.sp_Productos_Update 11, 'Prueba 1', 'hola', 500, 30, 7 ,7
+
+SELECT * FROM Productos
+
+
+------------------------------------------
+--Prodecimiento alamcenado: Eliminar datos a la tabla Productos
+-------------------------------------------
+
+CREATE PROCEDURE dbo.sp_Productos_Delete
+(
+    @ID_Producto INT
+)
+AS
+BEGIN
+    DELETE FROM Productos
+    WHERE ID_Producto = @ID_Producto;
+END;
+
+exec dbo.sp_Productos_Delete 14
+
+SELECT * FROM Productos
+
+
+---------------------------------
+--------------------------------
+---------------------------------
 
 
 ------------------------------------

@@ -49,9 +49,20 @@
                 @Html.DisplayFor(modelItem => item.Precio_Unitario)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+
+                    <a asp-controller="DetallesVentas"
+                       asp-action="Edit"
+                       asp-route-id="@item.ID_Detalle"
+                       class="btn btn-primary">
+                        Editar
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@item.ID_Detalle"
+                       class="btn btn-danger">
+                        Eliminar
+                    </a>
+               
             </td>
         </tr>
 }
