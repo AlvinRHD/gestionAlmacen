@@ -3,6 +3,7 @@ using gestionAlmacen.Repositories.Clientes;
 using gestionAlmacen.Repositories.DetalleVenta;
 using gestionAlmacen.Repositories.Productos;
 using gestionAlmacen.Repositories.Ventas;
+using gestionAlmacen.Repositories.Categorias;
 
 namespace gestionAlmacen
 {
@@ -14,6 +15,8 @@ namespace gestionAlmacen
 
             //
             builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
+            //
+            builder.Services.AddScoped<ICategoriasRepository, CategoriasRepository>();
             //
             builder.Services.AddScoped<IClientesRepository, ClientesRepository>();
             //
