@@ -436,10 +436,206 @@ exec dbo.sp_Productos_Delete 14
 
 SELECT * FROM Productos
 
-
 ---------------------------------
 --------------------------------
 ---------------------------------
+
+------------------------------------------
+--Prodecimiento alamcenado: listar datos a la tabla Proveedores
+-------------------------------------------
+
+CREATE PROCEDURE dbo.sp_Proveedores_GetAll
+AS
+BEGIN
+    SELECT ID_Proveedor, Nombre, Direccion, Telefono, CorreoElectronico
+    FROM Proveedores;
+END;
+
+EXEC dbo.sp_Proveedores_GetAll
+
+
+------------------------------------------
+--Prodecimiento alamcenado: filtrar datos a la tabla Proveedores
+-------------------------------------------
+
+
+CREATE PROCEDURE dbo.sp_Proveedores_GetById
+(
+    @ID_Proveedor int
+)
+AS
+BEGIN
+    SELECT ID_Proveedor, Nombre, Direccion, Telefono, CorreoElectronico
+    FROM Proveedores
+    WHERE ID_Proveedor = @ID_Proveedor;
+END;
+
+
+EXEC dbo.sp_Proveedores_GetById 8
+
+select * from Proveedores
+
+
+------------------------------------------
+--Prodecimiento alamcenado: insertar datos a la tabla Proveedores
+-------------------------------------------
+
+
+CREATE PROCEDURE dbo.sp_Proveedores_Insert
+(
+    @Nombre nvarchar(100),
+    @Direccion nvarchar(255),
+    @Telefono nvarchar(20),
+    @CorreoElectronico nvarchar(100)
+)
+AS
+BEGIN
+    INSERT INTO dbo.Proveedores (Nombre, Direccion, Telefono, CorreoElectronico)
+    VALUES (@Nombre, @Direccion, @Telefono, @CorreoElectronico);
+END;
+
+EXEC dbo.sp_Proveedores_Insert 'Alvin', 'Por ahi', '1212-1212', 'hpla@gmail.com' 
+
+select * from Proveedores
+
+------------------------------------------
+--Prodecimiento alamcenado: Actualizar datos a la tabla Proveedores
+-------------------------------------------
+
+CREATE PROCEDURE dbo.sp_Proveedores_Update
+(
+    @ID_Proveedor int,
+    @Nombre nvarchar(100),
+    @Direccion nvarchar(255),
+    @Telefono nvarchar(20),
+    @CorreoElectronico nvarchar(100)
+)
+AS
+BEGIN
+    UPDATE dbo.Proveedores
+    SET Nombre = @Nombre, Direccion = @Direccion, Telefono = @Telefono, CorreoElectronico = @CorreoElectronico
+    WHERE ID_Proveedor = @ID_Proveedor;
+END;
+
+EXEC dbo.sp_Proveedores_Update 9, 'Ezequiel', 'Por alla', '1313-1313', 'example@gmail.com'
+
+------------------------------------------
+--Prodecimiento alamcenado: Eliminar datos a la tabla Proveedores
+-------------------------------------------
+
+CREATE PROCEDURE dbo.sp_Proveedores_Delete
+(
+    @ID_Proveedor int
+)
+AS
+BEGIN
+    DELETE FROM Proveedores
+    WHERE ID_Proveedor = @ID_Proveedor;
+END;
+
+EXEC dbo.sp_Proveedores_Delete 9
+
+------------------------------------
+------------------------------------
+-------------------------------------
+
+
+
+------------------------------------------
+--Prodecimiento alamcenado: Listar datos a la tabla Categorias
+-------------------------------------------
+
+
+CREATE PROCEDURE dbo.sp_Categorias_GetAll
+AS
+BEGIN
+    SELECT ID_Categoria, Nombre, Descripcion
+    FROM Categorias;
+END;
+
+EXEC dbo.sp_Categorias_GetAll
+
+
+select * from Categorias
+
+
+------------------------------------------
+--Prodecimiento alamcenado: Filtrar datos a la tabla Categorias
+-------------------------------------------
+
+CREATE PROCEDURE dbo.sp_Categorias_GetById
+(
+    @ID_Categoria int
+)
+AS
+BEGIN
+    SELECT ID_Categoria, Nombre, Descripcion
+    FROM Categorias
+    WHERE ID_Categoria = @ID_Categoria;
+END;
+
+EXEC dbo.sp_Categorias_GetById 8
+
+
+
+------------------------------------------
+--Prodecimiento alamcenado: Insertar datos a la tabla Categorias
+-------------------------------------------
+
+CREATE PROCEDURE dbo.sp_Categorias_Insert
+(
+    @Nombre nvarchar(100),
+    @Descripcion nvarchar(255)
+)
+AS
+BEGIN
+    INSERT INTO dbo.Categorias (Nombre, Descripcion)
+    VALUES (@Nombre, @Descripcion);
+END;
+
+EXEC dbo.sp_Categorias_Insert 'NombreInventado', 'DescripcionInventada'
+
+
+
+------------------------------------------
+--Prodecimiento alamcenado: Actualizar datos a la tabla Categorias
+-------------------------------------------
+
+CREATE PROCEDURE dbo.sp_Categorias_Update
+(
+    @ID_Categoria int,
+    @Nombre nvarchar(100),
+    @Descripcion nvarchar(255)
+)
+AS
+BEGIN
+    UPDATE dbo.Categorias
+    SET Nombre = @Nombre, Descripcion = @Descripcion
+    WHERE ID_Categoria = @ID_Categoria;
+END;
+
+EXEC dbo.sp_Categorias_Update 9, 'OtroNombre', 'OtraDescripcion'
+
+select * from Categorias
+
+
+
+------------------------------------------
+--Prodecimiento alamcenado: Eliminar datos a la tabla Categorias
+-------------------------------------------
+
+CREATE PROCEDURE dbo.sp_Categorias_Delete
+(
+    @ID_Categoria int
+)
+AS
+BEGIN
+    DELETE FROM Categorias
+    WHERE ID_Categoria = @ID_Categoria;
+END;
+
+EXEC dbo.sp_Categorias_Delete 9
+
 
 
 ------------------------------------
