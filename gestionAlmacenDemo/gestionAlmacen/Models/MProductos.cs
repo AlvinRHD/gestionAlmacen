@@ -16,5 +16,7 @@
 
         public int ID_Proveedor { get; set;}
 
+
+
     }
 }

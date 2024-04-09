@@ -25,6 +25,8 @@ namespace gestionAlmacen
             builder.Services.AddScoped<IDetalleVentasRepository, DetalleVentasRepository>();
             //
             builder.Services.AddScoped<IProductosRepository, ProductosRepository>();
+            //
+            builder.Services.AddScoped<ICategoriasRepository, CategoriasRepository>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

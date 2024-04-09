@@ -35,7 +35,7 @@ namespace gestionAlmacen.Repositories.Categorias
 
                 return connection.QueryFirstOrDefault<MCategorias>(
                                     storeProcedure,
-                                    new { ID_Categorias = id },
+                                    new { ID_Categoria = id },
                                     commandType: CommandType.StoredProcedure
                                    );
             }
@@ -77,7 +77,7 @@ namespace gestionAlmacen.Repositories.Categorias
 
                 connection.Execute(
                     storeProcedure,
-                    new { id },
+                    new { ID_Categoria = id },
                     commandType: CommandType.StoredProcedure
                     );
             }

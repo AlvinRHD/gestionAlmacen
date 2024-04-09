@@ -119,6 +119,5 @@ namespace gestionAlmacen.Controllers
                 return View(mClientes);
             }
         }
-
     }
 }

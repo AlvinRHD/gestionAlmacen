@@ -1,29 +1,83 @@
 use gestionAlmacen
 go
 
---------------
--- Insertar en la tabla Categorias
-INSERT INTO Categorias (Nombre, Descripcion) VALUES ('Categoria Ejemplo', 'Descripción de la categoría');
+------------------------------------------------------------------------------
+-- Para la tabla Clientes
+INSERT INTO dbo.Clientes (Nombre, Direccion, Telefono, CorreoElectronico)
+VALUES
+('Juan Pérez', 'Calle Principal 123', '123456789', 'juan@example.com'),
+('María García', 'Avenida Central 456', '987654321', 'maria@example.com'),
+('Carlos Rodríguez', 'Calle Secundaria 789', '555555555', 'carlos@example.com'),
+('Ana López', 'Boulevard Norte 1010', '333333333', 'ana@example.com'),
+('Luis Martínez', 'Calle Sur 2020', '111111111', 'luis@example.com');
+------------------------------------------------------------------------------
 
--- Insertar en la tabla Proveedores
-INSERT INTO Proveedores (Nombre, Direccion, Telefono, CorreoElectronico) 
-VALUES ('Proveedor Ejemplo', 'Dirección del proveedor', '123456789', 'proveedor@example.com');
+------------------------------------------------------------------------------
 
--- Insertar en la tabla Clientes
-INSERT INTO Clientes (Nombre, Direccion, Telefono, CorreoElectronico) 
-VALUES ('Cliente Ejemplo', 'Dirección del cliente', '987654321', 'cliente@example.com');
+-- Para la tabla Ventas
+INSERT INTO dbo.Ventas (ID_Cliente, Fecha, Total, EstadoVenta)
+VALUES
+(1, '2024-04-09', 150.00, 'Completada'),
+(2, '2024-04-08', 300.00, 'Pendiente'),
+(3, '2024-04-07', 75.00, 'Completada'),
+(4, '2024-04-06', 200.00, 'Completada'),
+(5, '2024-04-05', 500.00, 'Pendiente');
 
--- Insertar en la tabla Productos
-INSERT INTO Productos (Nombre, Descripcion, Precio, Stock, ID_Categoria, ID_Proveedor) 
-VALUES ('Producto Ejemplo', 'Descripción del producto', 100.00, 10, 8, 8); -- Asignando la categoría y proveedor previamente creados
+------------------------------------------------------------------------------
 
--- Insertar en la tabla Ventas
-INSERT INTO Ventas (ID_Cliente, Fecha, Total, EstadoVenta) 
-VALUES (5, '2024-04-03', 200.00, 'Completada'); -- Asignando el ID del cliente previamente creado
+------------------------------------------------------------------------------
 
--- Insertar en la tabla Detalles_Venta
-INSERT INTO Detalles_Venta (ID_Venta, ID_Producto, Cantidad, Precio_Unitario, Subtotal, Impuesto) 
-VALUES (9, 11, 2, 50.00, 100.00, 10.00); -- Asignando el ID de venta y producto previamente creados
+-- Para la tabla Categorias
+INSERT INTO dbo.Categorias (Nombre, Descripcion) 
+VALUES 
+('Electrónicos', 'Productos electrónicos de consumo'),
+('Ropa', 'Prendas de vestir'),
+('Hogar', 'Artículos para el hogar'),
+('Alimentos', 'Productos alimenticios'),
+('Juguetes', 'Juguetes para niños');
+
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+
+-- Para la tabla Proveedores
+INSERT INTO dbo.Proveedores (Nombre, Direccion, Telefono, CorreoElectronico)
+VALUES
+('Proveedor A', 'Calle Uno 123', '111222333', 'proveedorA@example.com'),
+('Proveedor B', 'Avenida Dos 456', '444555666', 'proveedorB@example.com'),
+('Proveedor C', 'Boulevard Tres 789', '777888999', 'proveedorC@example.com'),
+('Proveedor D', 'Calle Cuatro 1010', '123456789', 'proveedorD@example.com'),
+('Proveedor E', 'Avenida Cinco 2020', '987654321', 'proveedorE@example.com');
+
+
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+
+-- Para la tabla Productos
+INSERT INTO dbo.Productos (Nombre, Descripcion, Precio, Stock, ID_Categoria, ID_Proveedor)
+VALUES
+('Televisor LED', 'Televisor LED de 55 pulgadas', 799.99, 50, 1, 1),
+('Camiseta', 'Camiseta de algodón de color blanco', 19.99, 100, 2, 2),
+('Sartén', 'Sartén antiadherente de 24 cm', 29.99, 75, 3, 3),
+('Arroz', 'Arroz blanco de grano largo', 5.99, 200, 4, 4),
+('Muñeca', 'Muñeca de juguete para niñas', 14.99, 50, 5, 5);
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+-- Para la tabla Detalle_Venta
+
+INSERT INTO [dbo].[Detalles_Venta] ([ID_Venta], [ID_Producto], [Cantidad], [Precio_Unitario], [Subtotal], [Impuesto])
+VALUES
+(1, 1, 2, 10.50, 21.00, 2.10),
+(1, 3, 1, 15.75, 15.75, 1.57),
+(2, 2, 3, 8.25, 24.75, 2.48),
+(2, 4, 2, 12.40, 24.80, 2.48),
+(3, 5, 1, 18.00, 18.00, 1.80);
+
+------------------------------------------------------------------------------
 
 
 ---Selecionamos todas las tablas
@@ -207,7 +261,12 @@ begin
 	where ID_Venta = @ID_Venta;
 end;
 
-exec dbo.sp_Ventas_Delete 11
+exec dbo.sp_Ventas_Delete 2
+
+select*from Ventas
+
+select * from Detalles_Venta
+
 
 select * from Categorias
 SELECT * FROM Proveedores
@@ -233,6 +292,8 @@ BEGIN
 	INNER JOIN Productos
 	ON Detalles_Venta.ID_Producto = Productos.ID_Producto
 END;
+
+EXEC sp_DetallesVenta_GetAll
 
 
 
@@ -284,7 +345,7 @@ EXEC dbo.sp_DetallesVenta_GetByVentaID 3
 --Prodecimiento alamcenado: Inserta datos a la tabla Detalle_Venta
 -------------------------------------------
 
-CREATE PROCEDURE dbo.sp_DetallesVenta_Insert 
+ALTER PROCEDURE dbo.sp_DetallesVenta_Insert 
 (
     @ID_Venta INT,
     @ID_Producto INT,
@@ -301,14 +362,16 @@ END;
 
 SELECT * FROM Detalles_Venta
 
-EXEC dbo.sp_DetallesVenta_Insert 12, 11, 3, 1000.00, 2000.00, 10.00
+EXEC dbo.sp_DetallesVenta_Insert 12, 20, 3, 1000.00, 2000.00, 10.00
 
+select * from Productos
 
+select * from Ventas
 
 ------------------------------------------
 --Prodecimiento alamcenado: Actualiza los datos a la tabla Detalles_Ventas
 -------------------------------------------
-CREATE PROCEDURE dbo.sp_DetallesVenta_Update 
+ALTER PROCEDURE dbo.sp_DetallesVenta_Update 
 (
     @ID_Detalle INT,
     @ID_Venta INT,
@@ -333,7 +396,7 @@ EXEC dbo.sp_DetallesVenta_Update 3, 12, 11, 3, 1000.00, 4000.00, 20.00
 ------------------------------------------
 --Prodecimiento alamcenado: Elimina los datos de la tabla Detalle_Venta
 -------------------------------------------
-CREATE PROCEDURE dbo.sp_DetallesVenta_Delete
+ALTER PROCEDURE dbo.sp_DetallesVenta_Delete
 (
     @ID_Detalle INT
 )
@@ -347,7 +410,7 @@ END;
 SELECT * FROM Detalles_Venta
 
 
-EXEC dbo.sp_DetallesVenta_Delete 3
+EXEC dbo.sp_DetallesVenta_Delete 2
 
 
 
@@ -399,9 +462,11 @@ BEGIN
     VALUES (@Nombre, @Descripcion, @Precio, @Stock, @ID_Categoria, @ID_Proveedor);
 END;
 
-EXEC dbo.sp_Productos_Insert 'PS4', 'Consola', 400, 20, 7, 7
+EXEC dbo.sp_Productos_Insert 'PS4', 'Consola', 400, 20, 10, 8
 
 SELECT * FROM Productos
+select * from Categorias
+select * from Proveedores
 
 
 ------------------------------------------
@@ -444,7 +509,7 @@ BEGIN
     WHERE ID_Producto = @ID_Producto;
 END;
 
-exec dbo.sp_Productos_Delete 14
+exec dbo.sp_Productos_Delete 2
 
 SELECT * FROM Productos
 
@@ -558,7 +623,7 @@ EXEC dbo.sp_Proveedores_Delete 9
 -------------------------------------------
 
 
-CREATE PROCEDURE dbo.sp_Categorias_GetAll
+ALTER PROCEDURE dbo.sp_Categorias_GetAll
 AS
 BEGIN
     SELECT ID_Categoria, Nombre, Descripcion
@@ -575,7 +640,7 @@ select * from Categorias
 --Prodecimiento alamcenado: Filtrar datos a la tabla Categorias
 -------------------------------------------
 
-CREATE PROCEDURE dbo.sp_Categorias_GetById
+ALTER PROCEDURE dbo.sp_Categorias_GetById
 (
     @ID_Categoria int
 )
@@ -586,7 +651,7 @@ BEGIN
     WHERE ID_Categoria = @ID_Categoria;
 END;
 
-EXEC dbo.sp_Categorias_GetById 8
+EXEC dbo.sp_Categorias_GetById 10
 
 
 
@@ -594,7 +659,7 @@ EXEC dbo.sp_Categorias_GetById 8
 --Prodecimiento alamcenado: Insertar datos a la tabla Categorias
 -------------------------------------------
 
-CREATE PROCEDURE dbo.sp_Categorias_Insert
+ALTER PROCEDURE dbo.sp_Categorias_Insert
 (
     @Nombre nvarchar(100),
     @Descripcion nvarchar(255)
@@ -607,13 +672,15 @@ END;
 
 EXEC dbo.sp_Categorias_Insert 'NombreInventado', 'DescripcionInventada'
 
+SELECT * FROM Categorias
+
 
 
 ------------------------------------------
 --Prodecimiento alamcenado: Actualizar datos a la tabla Categorias
 -------------------------------------------
 
-CREATE PROCEDURE dbo.sp_Categorias_Update
+ALTER PROCEDURE dbo.sp_Categorias_Update
 (
     @ID_Categoria int,
     @Nombre nvarchar(100),
@@ -626,7 +693,7 @@ BEGIN
     WHERE ID_Categoria = @ID_Categoria;
 END;
 
-EXEC dbo.sp_Categorias_Update 9, 'OtroNombre', 'OtraDescripcion'
+EXEC dbo.sp_Categorias_Update 10, 'OtroNombre', 'OtraDescripcion'
 
 select * from Categorias
 
@@ -636,7 +703,7 @@ select * from Categorias
 --Prodecimiento alamcenado: Eliminar datos a la tabla Categorias
 -------------------------------------------
 
-CREATE PROCEDURE dbo.sp_Categorias_Delete
+ALTER PROCEDURE dbo.sp_Categorias_Delete
 (
     @ID_Categoria int
 )
@@ -646,7 +713,25 @@ BEGIN
     WHERE ID_Categoria = @ID_Categoria;
 END;
 
-EXEC dbo.sp_Categorias_Delete 9
+EXEC dbo.sp_Categorias_Delete 11
+
+
+
+
+
+DELETE Categorias WHERE ID_Categoria = 8
+
+SELECT * FROM Categorias
+
+select * from Detalles_Venta
+
+delete Detalles_Venta Where ID_Detalle = 7
+
+
+
+
+
+
 
 
 
@@ -681,17 +766,6 @@ CREATE TABLE Clientes (
     CorreoElectronico NVARCHAR(100)
 );
 
-CREATE TABLE Productos (
-    ID_Producto INT IDENTITY(1,1) PRIMARY KEY,
-    Nombre NVARCHAR(100),
-    Descripcion NVARCHAR(255),
-    Precio MONEY,
-    Stock INT,
-    ID_Categoria INT,
-    ID_Proveedor INT,
-    FOREIGN KEY (ID_Categoria) REFERENCES Categorias(ID_Categoria) ON DELETE CASCADE,
-    FOREIGN KEY (ID_Proveedor) REFERENCES Proveedores(ID_Proveedor) ON DELETE CASCADE
-);
 
 CREATE TABLE Ventas (
     ID_Venta INT IDENTITY(1,1) PRIMARY KEY,
@@ -699,8 +773,9 @@ CREATE TABLE Ventas (
     Fecha DATE,
     Total MONEY,
     EstadoVenta NVARCHAR(50),
-    FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente) ON DELETE CASCADE
+    FOREIGN KEY (ID_Cliente) REFERENCES Clientes(ID_Cliente)
 );
+
 
 CREATE TABLE Detalles_Venta (
     ID_Detalle INT IDENTITY(1,1) PRIMARY KEY,
@@ -710,6 +785,37 @@ CREATE TABLE Detalles_Venta (
     Precio_Unitario DECIMAL(10, 2),
     Subtotal MONEY,
     Impuesto MONEY,
-    FOREIGN KEY (ID_Venta) REFERENCES Ventas(ID_Venta) ON DELETE CASCADE,
+    FOREIGN KEY (ID_Venta) REFERENCES Ventas(ID_Venta),
     FOREIGN KEY (ID_Producto) REFERENCES Productos(ID_Producto)
 );
+
+
+
+
+
+---------------------------------------------------------------------------------------
+---ELIMINO DE REGISTROS DE TODAS LAS TABLAS---DEJANDO EN CERO LOS REGISTROS-----------
+--------------------------------------------------------------------------------------
+
+
+-- Paso 1: Eliminar todos los registros de la tabla
+DELETE FROM Categorias;
+DELETE FROM Proveedores;
+DELETE FROM Clientes;
+DELETE FROM Ventas;
+DELETE FROM Productos;
+DELETE FROM Detalles_Venta;
+
+
+-- Paso 2: Reiniciar el contador de identidad (si aplica)
+DBCC CHECKIDENT ('Categorias', RESEED, 0);
+DBCC CHECKIDENT ('Proveedores', RESEED, 0);
+DBCC CHECKIDENT ('Clientes', RESEED, 0);
+DBCC CHECKIDENT ('Ventas', RESEED, 0);
+DBCC CHECKIDENT ('Detalles_Venta', RESEED, 0);
+DBCC CHECKIDENT ('Productos', RESEED, 0);
+	
+
+---------------------------------------------------------------------------------------
+---ELIMINO DE REGISTROS DE TODAS LAS TABLAS---DEJANDO EN CERO LOS REGISTROS-----------
+--------------------------------------------------------------------------------------
