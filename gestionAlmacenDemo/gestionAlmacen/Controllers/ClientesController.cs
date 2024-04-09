@@ -1,16 +1,21 @@
-﻿using gestionAlmacen.Models; ///
+﻿using gestionAlmacen.Models; 
+///
 using gestionAlmacen.Repositories.Clientes;
+using gestionAlmacen.Services.Email;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing;
 
 namespace gestionAlmacen.Controllers
 {
     public class ClientesController : Controller
     {
         private readonly IClientesRepository _clientesRepository;
+        private readonly IEmailService _emailService;
 
-        public ClientesController(IClientesRepository clientesRepository)
+        public ClientesController(IClientesRepository clientesRepository, IEmailService emailService)
         {
             _clientesRepository = clientesRepository;
+            _emailService = emailService;
         }
 
         //Se muestra la vista index del cliente
@@ -41,6 +46,12 @@ namespace gestionAlmacen.Controllers
                 _clientesRepository.Add(mClientes);
 
                 TempData["message"] = "Datos guardados exitosamente";
+
+                string email = "equipo4calculadora@gmail.com";
+                string subject = "Bienvenido al sistema";
+                string body = "Bienvenido al sistema de gestion de almacen " + mClientes.Nombre;
+
+                _emailService.SendEmail(email, mClientes.Nombre, subject, body);
 
                 return RedirectToAction(nameof(Index));
             }

@@ -4,6 +4,7 @@ using gestionAlmacen.Repositories.DetalleVenta;
 using gestionAlmacen.Repositories.Productos;
 using gestionAlmacen.Repositories.Ventas;
 using gestionAlmacen.Repositories.Categorias;
+using gestionAlmacen.Services.Email;
 
 namespace gestionAlmacen
 {
@@ -12,6 +13,10 @@ namespace gestionAlmacen
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            //Email
+            builder.Services.AddTransient<IEmailService, EmailService>();
+
 
             //
             builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
