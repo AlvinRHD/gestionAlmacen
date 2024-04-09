@@ -2,6 +2,7 @@
 using gestionAlmacen.Data;
 using gestionAlmacen.Models;
 using NuGet.Protocol.Plugins;
+using System.Collections;
 using System.Data;
 
 namespace gestionAlmacen.Repositories.DetalleVenta
@@ -15,29 +16,39 @@ namespace gestionAlmacen.Repositories.DetalleVenta
             _dataAccess = dataAccess;
         }
 
-        public IEnumerable<MVentas> GetAllVentas()
+        public IEnumerable<MProductos> GetAllProductos()
         {
-            string query = "SELECT ID_Venta, ID_Cliente, Fecha, Total, EstadoVenta FROM Ventas;";
+            string query = "SELECT ID_Producto, Nombre, Descripcion, Precio, Stock, ID_Categoria, ID_Proveedor FROM Productos;";
 
             using (var connection = _dataAccess.GetConnection())
             {
-                return connection.Query<MVentas>(query);
+                return connection.Query<MProductos>(query);
             }
         }
+
+        //TALVEZ
+        //public IEnumerable<MVentas> GetAllVentas()
+        //{
+        //    string query = "SELECT ID_Venta, ID_Cliente, Fecha, Total, EstadoVenta FROM Ventas";
+        //    using (var connection = _dataAccess.GetConnection())
+        //    {
+        //        return connection.Query<MVentas>(query);
+        //    }
+        //}
 
         public IEnumerable<MDetalle_Venta> GetAll()
         {
             using (var connection = _dataAccess.GetConnection())
             {
                 string storedProcedure = "dbo.sp_DetallesVenta_GetAll";
-                var detalles_ventas = connection.Query<MDetalle_Venta, MVentas, MDetalle_Venta>
-                    (storedProcedure, (detallesVenta, mVentas) =>
+                var detalles_ventas = connection.Query<MDetalle_Venta, MProductos, MDetalle_Venta>
+                    (storedProcedure, (detallesVenta, mProductos) =>
                     {
-                        detallesVenta.mVentas = mVentas;
+                        detallesVenta.mProductos = mProductos;
 
                         return detallesVenta;
                     },
-                    splitOn: "ID_Venta",
+                    splitOn: "Nombre",
                     commandType: CommandType.StoredProcedure);
 
                 return detalles_ventas;

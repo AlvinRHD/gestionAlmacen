@@ -78,7 +78,7 @@ namespace gestionAlmacen.Repositories.Clientes
 
                 connection.Execute(
                     storeProcedure,
-                    new { id },
+                    new { ID_Cliente = id },
                     commandType: CommandType.StoredProcedure
                     );
             }

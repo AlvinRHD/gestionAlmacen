@@ -14,10 +14,10 @@ namespace gestionAlmacen.Models
 
         public decimal Precio_Unitario { get; set; }
 
-        public SqlMoney Subtotal { get; set; }
+        public decimal Subtotal { get; set; }
 
-        public SqlMoney Impuesto { get; set; }
+        public decimal Impuesto { get; set; }
 
-        public MVentas? mVentas { get; set; }
+        public MProductos? mProductos { get; set; }
     }
 }

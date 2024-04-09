@@ -1,4 +1,5 @@
 ﻿using gestionAlmacen.Models;
+using System.Collections;
 
 namespace gestionAlmacen.Repositories.DetalleVenta
 {
@@ -8,7 +9,10 @@ namespace gestionAlmacen.Repositories.DetalleVenta
         void Delete(int id);
         void Edit(MDetalle_Venta mDetalle_Venta);
         IEnumerable<MDetalle_Venta> GetAll();
-        IEnumerable<MVentas> GetAllVentas();
+        IEnumerable<MProductos> GetAllProductos();
+
+        //IEnumerable<MVentas> GetAllVentas();
+        
         MDetalle_Venta? GetById(int id);
     }
 }

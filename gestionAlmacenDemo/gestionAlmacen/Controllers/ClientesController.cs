@@ -102,11 +102,11 @@ namespace gestionAlmacen.Controllers
         //Se elimina el cliente
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(MClientes mClientes)
         {
             try
             {
-                _clientesRepository.Delete(id);
+                _clientesRepository.Delete(mClientes.ID_Cliente);
 
                 TempData["message"] = "Dato eliminado exitosamente";
 
@@ -115,7 +115,8 @@ namespace gestionAlmacen.Controllers
             catch (Exception ex)
             {
                 TempData["message"] = "Error al eliminar el cliente: " + ex.Message;
-                return RedirectToAction(nameof(Delete), new { ID_Cliente = id, error = true });
+                ViewBag.errror = ex.Message;
+                return View(mClientes);
             }
         }
 

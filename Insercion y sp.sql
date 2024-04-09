@@ -121,17 +121,20 @@ exec dbo.sp_Clientes_Delete 5
 ------------------------------------------
 --Prodecimiento alamcenado: Devuelve el listado de todas las ventas
 -------------------------------------------
-create procedure dbo.sp_Ventas_GetAll
+alter procedure dbo.sp_Ventas_GetAll
 as
 begin
-	select Ventas.ID_Venta, Ventas.Fecha, Ventas.Total, Ventas.EstadoVenta, Clientes.Nombre
-	from Ventas
-	inner join Clientes
+	select Ventas.ID_Venta, Ventas.Fecha, Clientes.ID_Cliente, Ventas.Total, Ventas.EstadoVenta, Clientes.Nombre
+	from  Ventas inner join Clientes
 	on Ventas.ID_Cliente = Clientes.ID_Cliente
 end;
 
 exec dbo.sp_Ventas_GetAll
 
+
+select Ventas.ID_Venta, Ventas.Fecha, Clientes.ID_Cliente, Ventas.Total, Ventas.EstadoVenta, Clientes.Nombre
+from  Ventas inner join Clientes
+on Ventas.ID_Cliente = Clientes.ID_Cliente
 
 ------------------------------------------
 --Prodecimiento alamcenado: Filtra los registros por el ID_Venta
@@ -161,10 +164,7 @@ begin
 	values (@ID_Cliente, @Fecha, @Total, @EstadoVenta)
 end;
 
-exec dbo.sp_Ventas_Insert 10, '2025-04-04', 300, 'NoCompleta'
-
-select * from Ventas
-select * from Clientes
+exec dbo.sp_Ventas_Insert 8, '2025-04-04', 300, 'NoCompleta'
 
 
 ------------------------------------------
@@ -209,20 +209,32 @@ end;
 
 exec dbo.sp_Ventas_Delete 11
 
-select * from Ventas
+select * from Categorias
+SELECT * FROM Proveedores
+
+DELETE FROM Proveedores
+WHERE ID_Proveedor = 8;
 
 
+SELECT ID_Venta, ID_Cliente, Fecha, Total, EstadoVenta FROM Ventas
 
 ------------------------------------------
 --Prodecimiento alamcenado de la tabla Detalle_Venta
 -------------------------------------------
 
-CREATE PROCEDURE dbo.sp_DetallesVenta_GetAll
+SELECT ID_Producto, Nombre, Descripcion, Precio, Stock, ID_Categoria, ID_Proveedor FROM Productos
+
+
+ALTER PROCEDURE dbo.sp_DetallesVenta_GetAll
 AS
 BEGIN
-    SELECT Detalles_Venta.ID_Detalle, Detalles_Venta.ID_Venta, Detalles_Venta.ID_Producto, Detalles_Venta.Cantidad, Detalles_Venta.Precio_Unitario, Detalles_Venta.Subtotal, Detalles_Venta.Impuesto
-    FROM Detalles_Venta;
+    SELECT Detalles_Venta.ID_Detalle, Detalles_Venta.ID_Venta, Productos.ID_Producto, Detalles_Venta.Cantidad, Detalles_Venta.Precio_Unitario, Detalles_Venta.Subtotal, Detalles_Venta.Impuesto, Productos.Nombre
+    FROM Detalles_Venta
+	INNER JOIN Productos
+	ON Detalles_Venta.ID_Producto = Productos.ID_Producto
 END;
+
+
 
 INSERT INTO Clientes (Nombre, Direccion, Telefono, CorreoElectronico) 
 VALUES ('Cliente A', 'Calle Uno 456', '111222333', 'clienteA@example.com');

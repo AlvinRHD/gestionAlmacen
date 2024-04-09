@@ -103,17 +103,21 @@ namespace gestionAlmacen.Controllers
         // POST: ProductosController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(MProductos mProductos)
         {
             try
             {
-                _productosRepository.Delete(id);
+                _productosRepository.Delete(mProductos.ID_Producto);
+
+                TempData["message"] = "Dato eliminado exitosamente";
+
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                TempData["Error al eliminar"] = ex.Message;
-                return RedirectToAction(nameof(Delete), new { ID_Producto = id, error = true });
+                TempData["message"] = "Error al eliminar el cliente: " + ex.Message;
+                ViewBag.errror = ex.Message;
+                return View(mProductos);
             }
         }
 

@@ -14,7 +14,6 @@ namespace gestionAlmacen.Repositories.Categorias
             _dataAccess = dataAccess;
         }
 
-
         public IEnumerable<MCategorias> GetAll()
         {
             using (var connection = _dataAccess.GetConnection())

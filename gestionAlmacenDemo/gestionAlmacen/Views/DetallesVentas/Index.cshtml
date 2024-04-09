@@ -12,14 +12,14 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.ID_Detalle)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.ID_Venta)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ID_Producto)
+                @Html.DisplayNameFor(model => model.mProductos.Nombre)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cantidad)
@@ -27,27 +27,39 @@
             <th>
                 @Html.DisplayNameFor(model => model.Precio_Unitario)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subtotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Impuesto)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            @* <td>
                 @Html.DisplayFor(modelItem => item.ID_Detalle)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.ID_Venta)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID_Producto)
-            </td>
+                <td>
+                    @item.mProductos?.Nombre
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Cantidad)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Precio_Unitario)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subtotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Impuesto)
+                </td>
             <td>
 
                     <a asp-controller="DetallesVentas"

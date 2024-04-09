@@ -79,11 +79,12 @@ namespace gestionAlmacen.Repositories.Productos
 
                 connection.Execute(
                     storeProcedure,
-                    new { id },
+                    new { ID_Producto = id },
                     commandType: CommandType.StoredProcedure
                     );
             }
         }
+
     }
 }
 

@@ -9,19 +9,31 @@ namespace gestionAlmacen.Controllers
     public class DetallesVentasController : Controller
     {
         private readonly IDetalleVentasRepository _detatalleVentaRepository;
-        private SelectList _ventasList;
+        private SelectList _productosList;
+
+        //talvez
+        //private SelectList _ventasList;
 
         public DetallesVentasController(IDetalleVentasRepository detatalleVentaRepository)
         {
             _detatalleVentaRepository = detatalleVentaRepository;
-            _ventasList = new SelectList(
-                _detatalleVentaRepository.GetAllVentas(),
-                nameof(MVentas.ID_Cliente),
-                nameof(MVentas.ID_Venta)
+            _productosList = new SelectList(
+                _detatalleVentaRepository.GetAllProductos(),
+                nameof(MProductos.ID_Producto),
+                nameof(MProductos.Nombre)
                 );
+
+            //// Cargar los ID_Venta para la vista
+            //ViewBag.Ventas = new SelectList(
+            //    _detatalleVentaRepository.GetAllVentas(),
+            //    nameof(MVentas.ID_Venta),
+            //    nameof(MVentas.ID_Venta)
+            //);
+
+
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View(_detatalleVentaRepository.GetAll());
         }
@@ -35,7 +47,10 @@ namespace gestionAlmacen.Controllers
         // GET: FacultyController/Create
         public ActionResult Create()
         {
-            ViewBag.Ventas = _ventasList;
+            ViewBag.Productos = _productosList;
+
+            //Talvez
+            //ViewBag.Ventas = _ventasList;
 
             return View();
         }
@@ -53,7 +68,7 @@ namespace gestionAlmacen.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Ventas = _ventasList;
+                ViewBag.Productos = _productosList;
 
                 return View(detalle_Venta);
             }
@@ -65,16 +80,16 @@ namespace gestionAlmacen.Controllers
         {
             var detalle_Venta = _detatalleVentaRepository.GetById(id);
 
-            _ventasList = new SelectList(
-                                _detatalleVentaRepository.GetAllVentas(),
-                                nameof(MVentas.ID_Cliente),
-                                nameof(MVentas.ID_Venta),
-                                //Posible error mVentas a MVentas
-                                detalle_Venta?.mVentas?.ID_Venta
+            _productosList = new SelectList(
+                                _detatalleVentaRepository.GetAllProductos(),
+                                nameof(MProductos.ID_Producto),
+                                nameof(MProductos.Nombre),
+                                // mProductos es del modelo el ultimo
+                                detalle_Venta?.mProductos?.ID_Producto
 
                                    );
 
-            ViewBag.Clientes = _ventasList;
+            ViewBag.Productos = _productosList;
 
             return View(detalle_Venta);
         }
@@ -92,7 +107,7 @@ namespace gestionAlmacen.Controllers
             }
             catch
             {
-                ViewBag.Clientes = _ventasList;
+                ViewBag.Productos = _productosList;
 
                 return View(detalle_Venta);
             }

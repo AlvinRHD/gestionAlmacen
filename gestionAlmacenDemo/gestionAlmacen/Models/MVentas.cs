@@ -10,7 +10,7 @@ namespace gestionAlmacen.Models
 
         public DateTime Fecha { get; set; }
 
-        public SqlMoney Total { get; set; }
+        public decimal Total { get; set; }
 
         public string EstadoVenta { get; set; }
 
