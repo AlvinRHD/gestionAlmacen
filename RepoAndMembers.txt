@@ -1,0 +1,10 @@
+INTEGRANTES:
+
+Alvin Ezequiel Rosales Hernández -U20230560
+Leo Steven Hernández Salmerón - U20210358
+Yosselyn Marilyn Hernández Orellana
+Judith Esperanza Del Cid De La O
+
+ENLACE DEL REPO:
+
+https://github.com/AlvinRHD/gestionAlmacen.git
