@@ -4,12 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Detalle venta</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success">Crear nueva venta</a>
 </p>
-<table class="table">
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-primary" role="alert">
+        @TempData["message"]
+    </div>
+}
+<table class="table table-bordered table-striped table-responsive mt-2">
     <thead>
         <tr>
             @* <th>

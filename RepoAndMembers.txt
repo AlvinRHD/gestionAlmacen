@@ -2,9 +2,23 @@ INTEGRANTES:
 
 Alvin Ezequiel Rosales Hernández -U20230560
 Leo Steven Hernández Salmerón - U20210358
-Yosselyn Marilyn Hernández Orellana
-Judith Esperanza Del Cid De La O
+Yosselyn Marilyn Hernández Orellana - U20230717
+Judith Esperanza Del Cid De La O - U20220220
 
 ENLACE DEL REPO:
 
 https://github.com/AlvinRHD/gestionAlmacen.git
+
+--------------------------------------------
+--------------------------------------------
+-Notas: Puedes utilizar el sistema en este orden al insertar datos:
+clientes, Ventas, Proveedores, Categorias, Productos, Detalle de venta.
+
+-Eliminar datos en este orden:
+
+Ventas
+Clientes
+Detalle Ventas
+Productos
+Categorias
+Proveedores

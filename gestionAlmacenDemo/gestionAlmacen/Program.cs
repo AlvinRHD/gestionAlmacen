@@ -5,6 +5,8 @@ using gestionAlmacen.Repositories.Productos;
 using gestionAlmacen.Repositories.Ventas;
 using gestionAlmacen.Repositories.Categorias;
 using gestionAlmacen.Repositories.Proveedores;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using gestionAlmacen.Services.Email;
 
 namespace gestionAlmacen
 {
@@ -14,6 +16,7 @@ namespace gestionAlmacen
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddTransient <IEmailService, EmailService>();
             //
             builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
             //

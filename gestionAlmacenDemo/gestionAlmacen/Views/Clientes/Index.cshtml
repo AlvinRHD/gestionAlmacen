@@ -4,17 +4,25 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Clientes</h1>
 
 <p>
-    <a asp-action="Create">Crear nuevo cliente</a>
+    <a asp-action="Create" class="btn btn-success">Crear nuevo cliente</a>
 </p>
-<table class="table">
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-primary" role="alert">
+        @TempData["message"]
+    </div>
+}
+
+<table class="table table-bordered table-striped table-responsive mt-2">
     <thead>
         <tr>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.ID_Cliente)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
@@ -33,9 +41,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            @* <td>
                     @Html.DisplayFor(modelItem => item.ID_Cliente)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>

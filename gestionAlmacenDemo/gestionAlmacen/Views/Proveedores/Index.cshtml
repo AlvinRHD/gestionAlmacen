@@ -4,17 +4,24 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Proveedores</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success">Crear nuevo proveedor</a>
 </p>
-<table class="table">
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-primary" role="alert">
+        @TempData["message"]
+    </div>
+}
+<table class="table table-bordered table-striped table-responsive mt-2">
     <thead>
         <tr>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.ID_Proveedor)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
@@ -33,9 +40,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            @* <td>
                 @Html.DisplayFor(modelItem => item.ID_Proveedor)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
@@ -49,9 +56,19 @@
                 @Html.DisplayFor(modelItem => item.CorreoElectronico)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+
+                    <a asp-controller="Proveedores"
+                       asp-action="Edit"
+                       asp-route-id="@item.ID_Proveedor"
+                       class="btn btn-primary">
+                        Editar
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@item.ID_Proveedor"
+                       class="btn btn-danger">
+                        Eliminar
+                    </a>
             </td>
         </tr>
 }
