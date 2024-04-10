@@ -4,7 +4,7 @@ using gestionAlmacen.Repositories.DetalleVenta;
 using gestionAlmacen.Repositories.Productos;
 using gestionAlmacen.Repositories.Ventas;
 using gestionAlmacen.Repositories.Categorias;
-using gestionAlmacen.Services.Email;
+using gestionAlmacen.Repositories.Proveedores;
 
 namespace gestionAlmacen
 {
@@ -13,10 +13,6 @@ namespace gestionAlmacen
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            //Email
-            builder.Services.AddTransient<IEmailService, EmailService>();
-
 
             //
             builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
@@ -31,7 +27,7 @@ namespace gestionAlmacen
             //
             builder.Services.AddScoped<IProductosRepository, ProductosRepository>();
             //
-            builder.Services.AddScoped<ICategoriasRepository, CategoriasRepository>();
+            builder.Services.AddScoped<IProveedoresRepository, ProveedoresRepository>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

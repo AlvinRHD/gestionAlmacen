@@ -1,6 +1,8 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 
+
+
 namespace gestionAlmacen.Data
 {
     public class SqlDataAccess : ISqlDataAccess
