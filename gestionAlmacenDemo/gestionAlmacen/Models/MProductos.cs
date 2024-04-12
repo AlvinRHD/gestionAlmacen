@@ -20,14 +20,20 @@ namespace gestionAlmacen.Models
         [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
 
-
+        [Required(ErrorMessage = "Este campo es obligatorio obligatorio")]
+        [Display(Name = "Precio")]
         public string Precio { get; set; }
 
-
+        [Required(ErrorMessage = "Este campo es obligatorio obligatorio")]
+        [Display(Name = "Stock")]
         public string Stock { get; set; }
 
+        [Required(ErrorMessage = "Este campo es obligatorio obligatorio")]
+        [Display(Name = "ID_Categoria")]
         public int ID_Categoria { get; set; }
 
+        [Required(ErrorMessage = "Este campo es obligatorio obligatorio")]
+        [Display(Name = "ID_Proveedor")]
         public int ID_Proveedor { get; set;}
 
 
