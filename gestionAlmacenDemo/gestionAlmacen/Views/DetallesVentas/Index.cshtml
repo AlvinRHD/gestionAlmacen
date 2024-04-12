@@ -16,7 +16,7 @@
         @TempData["message"]
     </div>
 }
-<table class="table table-bordered table-striped table-responsive mt-2">
+<table class="table table-bordered table-striped table-responsive mt-2" id="Detalle_ventaTables">
     <thead>
         <tr>
             @* <th>
@@ -87,3 +87,28 @@
 }
     </tbody>
 </table>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $("#Detalle_ventaTables").DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'pdf', 'excel'
+                ],
+                columnDefs: [
+                    {
+                        target: 6,
+                        orderable: false,
+                        searchable: false
+                    }
+                ],
+                // language: {
+                //     url: '//cdn.datatables.net/plug-ins/2.0.3/i18n/es-ES.json'
+                // }
+            });
+        })
+    </script>
+}
+

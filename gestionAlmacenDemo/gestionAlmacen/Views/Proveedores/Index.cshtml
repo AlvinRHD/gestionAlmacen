@@ -16,7 +16,7 @@
         @TempData["message"]
     </div>
 }
-<table class="table table-bordered table-striped table-responsive mt-2">
+<table class="table table-bordered table-striped table-responsive mt-2" id="ProveedoresTables">
     <thead>
         <tr>
             @* <th>
@@ -74,3 +74,29 @@
 }
     </tbody>
 </table>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $("#ProveedoresTables").DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'pdf', 'excel'
+                ],
+                columnDefs: [
+                    {
+                        target: 4,
+                        orderable: false,
+                        searchable: false
+                    }
+                ],
+                // language: {
+                //     url: '//cdn.datatables.net/plug-ins/2.0.3/i18n/es-ES.json'
+                // }
+            });
+        })
+    </script>
+}
+
+
